@@ -21,7 +21,7 @@ Resources:
   DIRECTORY:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://raw.githubusercontent.com/mikeplavsky/aws-ad/main/ad.yaml
+      TemplateURL: https://ad-aws.s3.amazonaws.com/ad.yaml
       Parameters:
         Tag: !Ref Tag
         VPC: !GetAtt VPC.Outputs.VPC
