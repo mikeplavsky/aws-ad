@@ -1,0 +1,37 @@
+Description:  >-
+  **WARNING** This template creates AWS VPC NAT Gateway.
+  You will be billed for the AWS resources used if you create a stack from this template.
+
+Parameters:
+  Tag:
+    Description: We tag all AWS resources for your convinience.
+    ConstraintDescription: Forward Slash required
+    AllowedPattern: '^\S+\/\S+'
+    Type: String
+    Default: on-aws/workspaces
+
+  BundledId:
+    Description: >
+      Amazon WorkSpace Bundle Id.
+      We want to use Amazon Linux 2 by default. You can use next command line to find related Amazon Workspaces Bundle.
+      aws workspaces describe-workspace-bundles --owner AMAZON --query "Bundles[?Name=='Standard with Amazon Linux 2']".
+      Change filter to <<Standard with Windows 10>> if you need Windows.
+    Type: String
+    Default: wsb-clj85qzj1
+
+Resources:
+  VPC:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://on-aws-us-east-1-master.s3.amazonaws.com/vpc/template.yaml
+      Parameters:
+        Tag: !Ref Tag
+
+  DIRECTORY:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://raw.githubusercontent.com/mikeplavsky/aws-ad/main/ad.yaml
+      Parameters:
+        Tag: !Ref Tag
+        VPC: !GetAtt VPC.Outputs.VPC
+        PrivateSubnets: !GetAtt VPC.Outputs.PrivateSubnets
