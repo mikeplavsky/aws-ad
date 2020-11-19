@@ -10,15 +10,6 @@ Parameters:
     Type: String
     Default: on-aws/workspaces
 
-  BundledId:
-    Description: >
-      Amazon WorkSpace Bundle Id.
-      We want to use Amazon Linux 2 by default. You can use next command line to find related Amazon Workspaces Bundle.
-      aws workspaces describe-workspace-bundles --owner AMAZON --query "Bundles[?Name=='Standard with Amazon Linux 2']".
-      Change filter to <<Standard with Windows 10>> if you need Windows.
-    Type: String
-    Default: wsb-clj85qzj1
-
 Resources:
   VPC:
     Type: AWS::CloudFormation::Stack
