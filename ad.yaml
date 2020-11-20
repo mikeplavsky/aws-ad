@@ -45,7 +45,7 @@ Resources:
       # The password for the directory administrator
       # The directory creation process creates a directory administrator account with the user name Administrator and this password
       Password: !Join ['', ['{{resolve:secretsmanager:', !Ref DirectoryCredentials, ':SecretString:password}}' ]]
-      Edition: Standart
+      Edition: Standard
       EnableSso: true
       CreateAlias: true # The alias is used to construct the access URL for the directory, such as http://<alias>.awsapps.com
       VpcSettings:
